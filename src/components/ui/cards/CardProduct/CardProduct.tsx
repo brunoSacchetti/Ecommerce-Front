@@ -1,15 +1,16 @@
 import { FC } from "react";
 import { alertError } from "../../../../helpers/alerts";
-import { Iproduct } from "../../../../types/Iproduct";
+import { Iproduct } from "../../../../typesBorrar/Iproduct";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../../hooks/redux";
 import { setProductActive } from "../../../../redux/slices/Products";
 import styles from "./CardProduct.module.css";
 import { IconCustom } from "../../Icon/Icon";
 import { Button } from "@mui/material";
+import IArticuloManufacturado from "../../../../types/ArticuloManufacturado";
 
 interface ICardProduct {
-  product: Iproduct;
+  product: IArticuloManufacturado;
 }
 
 export const CardProduct: FC<ICardProduct> = ({ product }) => {

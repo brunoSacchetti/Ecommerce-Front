@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Iproduct } from "../../types/Iproduct";
+import { Iproduct } from "../../typesBorrar/Iproduct";
+import IArticuloManufacturado from "../../types/ArticuloManufacturado";
 
 interface IInitialState {
-  products: Iproduct[];
-  productActive: Iproduct | null;
+  products: IArticuloManufacturado[];
+  productActive: IArticuloManufacturado | null;
 }
 
 // Define el estado inicial utilizando esa interfaz
@@ -18,10 +19,10 @@ export const Products = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProductActive: (state, action: PayloadAction<Iproduct>) => {
+    setProductActive: (state, action: PayloadAction<IArticuloManufacturado>) => {
       state.productActive = action.payload;
     },
-    setProducts: (state, action: PayloadAction<Iproduct[]>) => {
+    setProducts: (state, action: PayloadAction<IArticuloManufacturado[]>) => {
       state.products = action.payload;
     },
     resetProductActive: (state) => {

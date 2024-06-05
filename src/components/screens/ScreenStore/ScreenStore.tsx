@@ -7,11 +7,11 @@ import { SearchBar } from "../../ui/SearchBar/SearchBar";
 export const ScreenStore = () => {
   return (
     <>
-      <Header />
-      <SearchBar />
-      <Filters />
+      {/* <Header /> */}
+     {/*  <SearchBar /> */}
+      {/* <Filters /> */}
       <ListProducts />
-      <Footer />
+{/*       <Footer /> */}
     </>
   );
 };

@@ -1,5 +1,5 @@
 // Importamos el tipo de dato Iproduct y la clase BackendClient
-import { Iproduct } from "../types/Iproduct";
+import { Iproduct } from "../typesBorrar/Iproduct";
 import { BackendClient } from "./BackendClient";
 
 // Clase ProductService que extiende BackendClient para interactuar con la API de productos

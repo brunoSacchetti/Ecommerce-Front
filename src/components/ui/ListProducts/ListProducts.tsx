@@ -4,17 +4,21 @@ import {
   setProducts,
   sortProductsByPrice,
 } from "../../../redux/slices/Products";
-import { ProductService } from "../../../services/ProductService";
+import { ProductService } from "../../../servicesBorrar/ProductService";
 import styles from "./ListProducts.module.css";
 import { CardProduct } from "../cards/CardProduct/CardProduct";
+import { ArticuloManufacturadoService } from "../../../services/ArticuloManufacturadoService";
+import IArticuloManufacturado from "../../../types/ArticuloManufacturado";
 const URLAPI = import.meta.env.VITE_API_URL;
+
+
 export const ListProducts = () => {
   const dispatch = useAppDispatch();
-  const productService = new ProductService(`${URLAPI}/products`);
+  const articuloManufacturadoService = new ArticuloManufacturadoService(`${URLAPI}/products`);
 
   const getAllProductsFromDb = async () => {
-    const res = await productService.getAll();
-    dispatch(setProducts(res));
+    const res = await articuloManufacturadoService.getAll();
+    dispatch(setProducts(res as IArticuloManufacturado[]));
 
     if (filters.price) {
       dispatch(
@@ -23,9 +27,9 @@ export const ListProducts = () => {
     }
   };
 
-  const getProductsByName = async (name: string) => {
+  /* const getProductsByName = async (name: string) => {
     if (filters.category) {
-      const res = await productService.findByNameAndCategory(
+      const res = await articuloManufacturadoService.findByNameAndCategory(
         filters.category,
         name
       );
@@ -36,9 +40,9 @@ export const ListProducts = () => {
         );
       }
     }
-  };
+  }; */
 
-  const getProductByCategory = async (category: string) => {
+ /*  const getProductByCategory = async (category: string) => {
     const res = await productService.getByCategory(category);
     dispatch(setProducts(res));
     if (filters.price) {
@@ -46,15 +50,15 @@ export const ListProducts = () => {
         sortProductsByPrice(filters.price === "Mayor Precio" ? false : true)
       );
     }
-  };
+  }; */
 
   const filters = useAppSelector((state) => state.filters);
 
   useEffect(() => {
     if (filters.category) {
-      getProductByCategory(filters.category);
+      /* getProductByCategory(filters.category); */
     } else if (filters.searchBar !== "") {
-      getProductsByName(filters.searchBar);
+      /* getProductsByName(filters.searchBar); */
     } else {
       getAllProductsFromDb();
     }

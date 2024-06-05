@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import styles from "./SearchBar.module.css";
 import { IconCustom } from "../Icon/Icon";
 import { ChangeEvent } from "react";
-import { ProductService } from "../../../services/ProductService";
+import { ProductService } from "../../../servicesBorrar/ProductService";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setProducts } from "../../../redux/slices/Products";
 import { setPrice, setSearch } from "../../../redux/slices/Filters";

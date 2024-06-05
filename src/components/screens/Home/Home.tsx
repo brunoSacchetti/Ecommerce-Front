@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
-import { CategoryService } from "../../../services/CategoryService";
-import { ICategories } from "../../../types/ICategories";
+import { CategoryService } from "../../../servicesBorrar/CategoryService";
+import { ICategories } from "../../../typesBorrar/ICategories";
 import { CardCategory } from "../../ui/cards/CardCategory/CardCategory";
 import styles from "./Home.module.css";
 import { Footer } from "../../ui/Footer/Footer";
+import { ICategoria } from "../../../types/Categoria";
+import { CategoriaService } from "../../../services/CategoriaService";
 const URLAPI = import.meta.env.VITE_API_URL;
 export const Home = () => {
-  const [categories, setCategories] = useState<ICategories[]>([]);
+  const [categories, setCategories] = useState<ICategoria[]>([]);
 
-  const categoryService = new CategoryService(`${URLAPI}/categories`);
+  const categoriaService = new CategoriaService(`${URLAPI}/categoria`);
 
   const getCategories = async () => {
-    const res = await categoryService.getAll();
+    const res = await categoriaService.getAll();
     setCategories(res);
   };
 
   useEffect(() => {
     getCategories();
   }, []);
-
+  console.log(categories);
+  
   return (
     <>
       <div className={styles.containerPrincipal__home}>
         <div className={styles.containerimg__home}>
-          <img src="./platoHome.png" />
-          <div className={styles.text__home}>
-            <h2>4 Tiempos</h2>
-          </div>
+          <img src="./POLLOLOGO.png" />
         </div>
         <div className={styles.containerCategories}>
           <div>
@@ -39,7 +39,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
+{/*       <Footer /> */}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IconCustom } from "../Icon/Icon";
-import { ProductService } from "../../../services/ProductService";
+import { ProductService } from "../../../servicesBorrar/ProductService";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   setProducts,

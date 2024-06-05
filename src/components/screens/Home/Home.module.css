@@ -39,6 +39,7 @@
   overflow-y: auto;
 }
 .containerCardsCategories {
+  cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1vh;
