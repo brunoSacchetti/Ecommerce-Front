@@ -1,0 +1,169 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "denomination": "Vegetariana",
+      "image": "https://mx.birdman.com/cdn/shop/articles/buddha-bowl-vegano-un-platillo-super-balanceado-750151_900x.jpg?v=1616616334"
+    },
+    {
+      "id": "2",
+      "denomination": "Pizzas",
+      "image": "https://www.hearthandfirepizza.com/cdn/shop/products/product-beauty-the-margherita_1100x.png?v=1656423819"
+    },
+    {
+      "id": "3",
+      "denomination": "Papas",
+      "image": "https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2022/01/12/un-plato-de-patatas-fritas-recien-hechas.jpeg"
+    },
+    {
+      "id": "4",
+      "denomination": "Hamburguesas",
+      "image": "https://www.pronacatqma.com/images/com_yoorecipe/banner_superior/18231_1.jpg"
+    },
+    {
+      "id": "5",
+      "denomination": "Postres",
+      "image": "https://content-cocina.lecturas.com/medio/2023/03/23/el-mejor-pastel-de-chocolate_b43ef72b_900x900.jpg"
+    },
+    {
+      "id": "6",
+      "denomination": "Bebidas",
+      "image": "https://media.vogue.mx/photos/5ecbbb4df863d188d6f3185c/master/w_1600,c_limit/jugo-de-naranja--naranja.jpg"
+    }
+  ],
+  "products": [
+    {
+      "images": [
+        "https://mx.birdman.com/cdn/shop/articles/buddha-bowl-vegano-un-platillo-super-balanceado-750151_900x.jpg?v=1616616334",
+        "https://www.veggieboogie.com/wp-content/uploads/2017/06/summer-buddha-bowl-3.jpg"
+      ],
+      "denomination": "Bowl de Buda Vegetariano",
+      "description": "Un bowl lleno de verduras frescas y quinoa.",
+      "price": "7.99",
+      "category": "Vegetariana",
+      "id": "1"
+    },
+    {
+      "images": [
+        "https://pietran.com.co/wp-content/uploads/2022/04/tostadas-con-guacamole-y-huevo-duro.webp",
+        "https://assets.tmecosys.com/image/upload/t_web600x528/img/recipe/ras/Assets/9095F1E1-5407-4953-9228-49AC7AAA8288/Derivates/b183ba61-d10f-4b04-85a6-22a056371b7b.jpg"
+      ],
+      "denomination": "Tostada de Aguacate",
+      "description": "Pan integral con aguacate machacado y semillas de sésamo.",
+      "price": "4.99",
+      "category": "Vegetariana",
+      "id": "2"
+    },
+    {
+      "images": [
+        "https://www.hearthandfirepizza.com/cdn/shop/products/product-beauty-the-margherita_1100x.png?v=1656423819",
+        "http://www.novizzima.com/wp-content/uploads/2017/07/1532810197904-e1604955176524.png"
+      ],
+      "denomination": "Pizza Margherita",
+      "description": "Pizza clásica con tomate, mozzarella y albahaca.",
+      "price": "9.99",
+      "category": "Pizzas",
+      "id": "6"
+    },
+    {
+      "images": [
+        "https://www.hearthandfirepizza.com/cdn/shop/products/product-beauty-the-pepperoni_1100x.png?v=1656424042",
+        "https://fusionloja.com/wp-content/uploads/2021/01/peppero.png"
+      ],
+      "denomination": "Pizza Pepperoni",
+      "description": "Pizza con rodajas de pepperoni y queso mozzarella.",
+      "price": "10.99",
+      "category": "Pizzas",
+      "id": "7"
+    },
+    {
+      "images": [
+        "https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2022/01/12/un-plato-de-patatas-fritas-recien-hechas.jpeg",
+        "https://www.cucinare.tv/wp-content/uploads/2020/02/Papas-fritas.jpg"
+      ],
+      "denomination": "Papas Fritas Clásicas",
+      "description": "Papas fritas crujientes con sal.",
+      "price": "2.99",
+      "category": "Papas",
+      "id": "11"
+    },
+    {
+      "images": [
+        "https://w6h5a5r4.rocketcdn.me/wp-content/uploads/2023/08/papas-fritas-cubiertas-queso-cheddar-vertido-o-tirado-1.jpg",
+        "https://rojoynegro.com.ar/pedidos/wp-content/uploads/2020/10/1137453-1598976356395.jpg"
+      ],
+      "denomination": "Papas con Queso",
+      "description": "Papas fritas cubiertas de queso cheddar derretido.",
+      "price": "4.99",
+      "category": "Papas",
+      "id": "12"
+    },
+
+    {
+      "images": [
+        "https://img.freepik.com/fotos-premium/hamburguesa-queso-clasica-aislada-sobre-fondo-blanco_1021632-1139.jpg?w=1380",
+        "https://img.freepik.com/fotos-premium/hamburguesa-queso-tomate-pan-hecho-parrilla-barbacoa-vista-lateral-cerrar_361869-161.jpg?w=1380"
+      ],
+      "denomination": "Hamburguesa Clásica con Queso",
+      "description": "Una deliciosa hamburguesa con queso cheddar derretido.",
+      "price": "5.99",
+      "category": "Hamburguesas",
+      "id": "16"
+    },
+    {
+      "images": [
+        "https://www.pronacatqma.com/images/com_yoorecipe/banner_superior/18231_1.jpg",
+        "https://mundosjumbo.cl/wp-content/uploads/sites/3/2019/03/iStock-520215281-1.jpg"
+      ],
+      "denomination": "Hamburguesa con Tocino",
+      "description": "Hamburguesa con queso y crujientes tiras de tocino.",
+      "price": "6.99",
+      "category": "Hamburguesas",
+      "id": "17"
+    },
+
+    {
+      "images": [
+        "https://content-cocina.lecturas.com/medio/2023/03/23/el-mejor-pastel-de-chocolate_b43ef72b_900x900.jpg",
+        "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcTHtQ-eXsljBaNo7G4AjmJe01i82aVyxRn0mO0C4SFj0ZS7sqMY_v8GW6b-vsMDwbz1"
+      ],
+      "denomination": "Pastel de Chocolate",
+      "description": "Delicioso pastel de chocolate con glaseado de chocolate.",
+      "price": "4.99",
+      "category": "Postres",
+      "id": "21"
+    },
+    {
+      "images": [
+        "https://assets.elgourmet.com/wp-content/uploads/2023/03/cover_w57l6qc9hj_iv-29-dic-54-1024x683.jpg.webp",
+        "https://www.infobae.com/new-resizer/XE3SSnyEnqfCjHf7gEDs57nBjWA=/992x661/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/YJ4XYYYZQZDGFJ43TBXMMN3T4U.jpg"
+      ],
+      "denomination": "Cheesecake",
+      "description": "Clásico cheesecake con una base de galleta graham.",
+      "price": "5.99",
+      "category": "Postres",
+      "id": "22"
+    },
+    {
+      "images": [
+        "https://cdn5885.templcdn.com/wp-content/uploads/2020/11/Cafe-Helado-scaled-e1610650722304.jpg",
+        "https://www.somoselcafe.com.ar/img/novedades/33.webp"
+      ],
+      "denomination": "Café Helado",
+      "description": "Café helado refrescante con leche.",
+      "price": "2.99",
+      "category": "Bebidas",
+      "id": "26"
+    },
+    {
+      "images": [
+        "https://media.vogue.mx/photos/5ecbbb4df863d188d6f3185c/master/w_1600,c_limit/jugo-de-naranja--naranja.jpg"
+      ],
+      "denomination": "Jugo de Naranja",
+      "description": "Jugo de naranja recién exprimido.",
+      "price": "3.99",
+      "category": "Bebidas",
+      "id": "27"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+.containerPincipalCarrousel__carrousel {
+  width: 70vw;
+  height: 30vh;
+  margin-bottom: 5vh;
+}
+.containerImg__carrousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  height: 30vh;
+}
+.img__carrousel {
+  width: 60vw;
+  height: 30vh;
+  object-fit: contain;
+  background-color: #fff;
+}
+
+/* Para dispositivos grandes (laptops, desktops pequeños) */
+@media (min-width: 992px) {
+  .containerPincipalCarrousel__carrousel {
+    width: 35vw;
+    height: 40vh;
+  }
+  .containerImg__carrousel {
+    width: 35vw;
+    height: 40vh;
+  }
+  .img__carrousel {
+    width: 30vw;
+    height: 40vh;
+  }
+}

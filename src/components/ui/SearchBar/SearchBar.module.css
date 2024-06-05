@@ -1,0 +1,29 @@
+.containnerPrincipal__SearchBar {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containner__SearchBar {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Para dispositivos grandes (laptops, desktops pequeños) */
+@media (min-width: 992px) {
+  .containner__SearchBar {
+    width: 60%;
+  }
+}
+
+/* Para dispositivos extra grandes (desktops grandes) */
+@media (min-width: 1200px) {
+  .containner__SearchBar {
+    width: 50%;
+  }
+}

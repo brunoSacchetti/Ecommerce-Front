@@ -1,0 +1,41 @@
+.containerPrincipal__ListProducts {
+  height: 65vh;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1vh;
+  position: relative;
+  width: 98%;
+}
+.containerProducts__ListProducts {
+  min-height: 95%;
+  max-height: 100%;
+  overflow-y: auto;
+  width: 98%;
+  background-color: #f2f2f2;
+  border-radius: 0.4rem;
+  display: flex;
+  padding: 1vh;
+  gap: 1vh;
+  flex-direction: column;
+}
+
+/* Para dispositivos pequeños (tabletas en orientación vertical, teléfonos grandes) */
+@media (min-width: 600px) {
+  .containerPrincipal__ListProducts {
+    width: 97%;
+  }
+  .containerProducts__ListProducts {
+    width: 70%;
+  }
+}
+
+/* Para dispositivos grandes (laptops, desktops pequeños) */
+@media (min-width: 992px) {
+  .containerPrincipal__ListProducts {
+    width: 60%;
+  }
+  .containerProducts__ListProducts {
+    width: 70%;
+  }
+}

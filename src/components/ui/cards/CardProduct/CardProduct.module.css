@@ -1,0 +1,72 @@
+.containerProduct__CardProduct {
+  display: flex;
+  width: 100%;
+  min-height: 20vh;
+  background-color: #fff;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 0.4rem;
+  position: relative;
+  justify-content: center;
+  z-index: 150;
+}
+
+.containerImg__CardProduct {
+  width: 40%;
+}
+
+.containerImg__CardProduct img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.4rem 0 0 0.4rem;
+  object-fit: 100% 100%;
+}
+
+.containerProprItem__CardProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.containerProps__CardProduct div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.titleCardItem__CardProduct {
+  font-weight: 600;
+  margin: 0;
+  font-size: 3vh;
+  margin-left: 0.3rem;
+}
+.descriptionItem__CardProduct {
+  font-weight: 300;
+  margin: 0;
+  font-size: 2vh;
+  margin-left: 0.3rem;
+}
+.actionCard__CardProduct {
+  z-index: 200;
+  display: flex;
+  width: 100%;
+  height: 6vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.viewMore__CardProduct {
+  color: #1976d2;
+}
+
+/* Para dispositivos pequeños (tabletas en orientación vertical, teléfonos grandes) */
+@media (min-width: 600px) {
+}
+
+/* Para dispositivos grandes (laptops, desktops pequeños) */
+@media (min-width: 992px) {
+  .containerProduct__CardProduct {
+    max-height: 10vh;
+  }
+}
