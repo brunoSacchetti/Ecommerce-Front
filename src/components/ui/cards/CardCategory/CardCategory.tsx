@@ -3,9 +3,9 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 
 
-import { useAppDispatch } from "../../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
-import { setCategory } from "../../../../redux/slices/Filters";
+import { setCategory, setCategoryData } from "../../../../redux/slices/Filters";
 
 import { FC } from "react";
 import { ICategoria } from "../../../../types/Categoria";
@@ -15,10 +15,15 @@ interface ICardCategory {
 export const CardCategory: FC<ICardCategory> = ({ category }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  
   const handleSelectCategory = () => {
     dispatch(setCategory(category.denominacion));
+    dispatch(setCategoryData(category));
     navigate("/store");
   };
+  
+  const cat = useAppSelector((state) => state.filters.categoryData);
+  console.log(cat);
 
   return (
     <Card

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   setProducts,
@@ -9,25 +9,79 @@ import styles from "./ListProducts.module.css";
 import { CardProduct } from "../cards/CardProduct/CardProduct";
 import { ArticuloManufacturadoService } from "../../../services/ArticuloManufacturadoService";
 import IArticuloManufacturado from "../../../types/ArticuloManufacturado";
+import IArticulo from "../../../types/IArticulo";
+import IArticuloGenerico from "../../../types/ArticuloGenerico/IArticuloGenerico";
+import { ICategoria } from "../../../types/Categoria";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const ListProducts = () => {
   const dispatch = useAppDispatch();
   
-  const articuloManufacturadoService = new ArticuloManufacturadoService(`${API_URL}/ArticuloManufacturado`);
+  //const articuloManufacturadoService = new ArticuloManufacturadoService(`${API_URL}/ArticuloManufacturado`);
+
+  const categoriaActual = useAppSelector((state) => state.filters.categoryData);
+
+  const [insumosGenericos, setInsumosGenericos] = useState<IArticulo[]>([]);
+  const [articulosManufacturadosGenericos, setArticulosManufacturadosGenericos] = useState<IArticulo[]>([]);
+  const [articuloGenerico, setArticuloGenerico] = useState<IArticulo[]>([]);
+
+  const filterInsumos = async () => {
+    const allInsumos: IArticulo[] = [];
+    categoriaActual?.forEach((cat: ICategoria) => {
+      const insumosNoElaborar = cat.insumos
+        .filter((insumo: any) => !(insumo.esParaElaborar))
+        .map((insumo: any) => ({
+          id: insumo.id,
+          denominacion: insumo.denominacion,
+        }));
+      allInsumos.push(...insumosNoElaborar);
+    });
+    setInsumosGenericos(allInsumos);
+  };
+
+  const filterArticulosManufacturados = async () => {
+    const allArticulosManufacturados: IArticulo[] = [];
+    console.log(categoriaActual);
+    
+    
+    categoriaActual?.forEach((cat: ICategoria) => {
+      const articulosManufacturados = cat.articulosManufacturados.map(
+        (articulo: any) => ({
+          id: articulo.id,
+          denominacion: articulo.denominacion,
+        })
+      );
+      allArticulosManufacturados.push(...articulosManufacturados);
+    });
+    setArticulosManufacturadosGenericos(allArticulosManufacturados);
+  };
+
+  useEffect(() => {
+    setArticuloGenerico([...insumosGenericos, ...articulosManufacturadosGenericos]);
+  }, [insumosGenericos, articulosManufacturadosGenericos]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  const fetchData = async () => {
+    await filterInsumos();
+    await filterArticulosManufacturados();
+  };
+
+
 
   const getAllProductsFromDb = async () => {
-    const res = await articuloManufacturadoService.getAll();
-    dispatch(setProducts(res as IArticuloManufacturado[]));
-
+    //const res = await articuloManufacturadoService.getAll();
+    dispatch(setProducts(articuloGenerico as IArticulo[]));
     if (filters.price) {
       dispatch(
         sortProductsByPrice(filters.price === "Mayor Precio" ? false : true)
       );
     }
   };
-
 
   /* const getProductsByName = async (name: string) => {
     if (filters.category) {

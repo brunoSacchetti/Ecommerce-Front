@@ -10,11 +10,12 @@ import IArticuloManufacturado from "../../../../types/ArticuloManufacturado";
 import { ImagenService } from "../../../../services/ImagenService";
 import IImagen from "../../../../types/IImagen";
 import Swal from "sweetalert2";
+import IArticulo from "../../../../types/IArticulo";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 interface ICardProduct {
-  product: IArticuloManufacturado;
+  product: IArticulo;
 }
 
 export const CardProduct: FC<ICardProduct> = ({ product }) => {

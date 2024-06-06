@@ -6,6 +6,7 @@ import styles from "./Home.module.css";
 import { Footer } from "../../ui/Footer/Footer";
 import { ICategoria } from "../../../types/Categoria";
 import { CategoriaService } from "../../../services/CategoriaService";
+import { Header } from "../../ui/Header/Header";
 const URLAPI = import.meta.env.VITE_API_URL;
 export const Home = () => {
   const [categories, setCategories] = useState<ICategoria[]>([]);
@@ -24,6 +25,7 @@ export const Home = () => {
   
   return (
     <>
+    <Header/>
       <div className={styles.containerPrincipal__home}>
         <div className={styles.containerimg__home}>
           <img src="./POLLOLOGO.png" />
