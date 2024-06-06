@@ -8,6 +8,8 @@ export const AppRouter = () => {
   const { category } = useAppSelector((state) => state.filters);
   const { productActive } = useAppSelector((state) => state.product);
 
+  
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

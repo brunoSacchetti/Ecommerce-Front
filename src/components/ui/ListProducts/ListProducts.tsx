@@ -9,12 +9,13 @@ import styles from "./ListProducts.module.css";
 import { CardProduct } from "../cards/CardProduct/CardProduct";
 import { ArticuloManufacturadoService } from "../../../services/ArticuloManufacturadoService";
 import IArticuloManufacturado from "../../../types/ArticuloManufacturado";
-const URLAPI = import.meta.env.VITE_API_URL;
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const ListProducts = () => {
   const dispatch = useAppDispatch();
-  const articuloManufacturadoService = new ArticuloManufacturadoService(`${URLAPI}/products`);
+  
+  const articuloManufacturadoService = new ArticuloManufacturadoService(`${API_URL}/ArticuloManufacturado`);
 
   const getAllProductsFromDb = async () => {
     const res = await articuloManufacturadoService.getAll();
@@ -26,6 +27,7 @@ export const ListProducts = () => {
       );
     }
   };
+
 
   /* const getProductsByName = async (name: string) => {
     if (filters.category) {
@@ -54,14 +56,18 @@ export const ListProducts = () => {
 
   const filters = useAppSelector((state) => state.filters);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     if (filters.category) {
-      /* getProductByCategory(filters.category); */
+      getProductByCategory(filters.category);
     } else if (filters.searchBar !== "") {
-      /* getProductsByName(filters.searchBar); */
+      getProductsByName(filters.searchBar);
     } else {
       getAllProductsFromDb();
     }
+  }, []); */
+
+  useEffect(() => {
+     getAllProductsFromDb();
   }, []);
 
   const products = useAppSelector((state) => state.product.products);
