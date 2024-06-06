@@ -19,17 +19,19 @@ interface ICardProduct {
 }
 
 export const CardProduct: FC<ICardProduct> = ({ product }) => {
-  const imageService = new ImagenService(`${API_URL}/ArticuloManufacturado`);
+  const imageServiceManufacturado = new ImagenService(`${API_URL}/ArticuloManufacturado`);
   
-  const [images, setImages] = useState<IImagen[]>([]);
+  const imageServiceInsumo = new ImagenService(`${API_URL}/ArticuloInsumo`);
 
+  const [images, setImages] = useState<IImagen[]>([]);
+  
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchImages = async () => {
       try {
-        const data = await imageService.getImagesByArticuloId(product.id);
+        const data = await imageServiceManufacturado.getImagesByArticuloId(product.id);
         setImages(data);
       } catch (error) {
         Swal.fire("Error", "Error al obtener las imágenes", "error");
@@ -37,7 +39,29 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
     };
 
     fetchImages();
-  }, [product.id]);
+  }, [product.id]); */
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        let data;
+        if (product.tipo === "insumo") {
+          data = await imageServiceInsumo.getImagesByArticuloId(product.id);
+        } else if (product.tipo === "manufacturado") {
+          data = await imageServiceManufacturado.getImagesByArticuloId(product.id);
+        } else {
+          // Manejar el caso en el que el tipo de producto no sea "insumo" ni "manufacturado"
+          console.error("Tipo de producto no válido:", product.tipo);
+          return; // Salir de la función sin cambiar el estado de las imágenes
+        }
+        setImages(data);
+      } catch (error) {
+        Swal.fire("Error", "Error al obtener las imágenes", "error");
+      }
+    };
+  
+    fetchImages();
+  }, [product.id, product.tipo]);
 
   const handleClickAddToCart = () => {
     alertError("Proximamente", "Todavia no esta disponible");
@@ -54,7 +78,10 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
         onClick={handleClickViewProduct}
         className={styles.containerImg__CardProduct}
       >
-        <img src={images.length > 0 ? images[0].url : "platoHome.png"} alt={product.denominacion} />
+        <img
+          src={images.length > 0 ? images[0].url : "platoHome.png"}
+          alt={product.denominacion}
+        />
       </div>
       <div className={styles.containerProprItem__CardProduct}>
         <div
@@ -70,8 +97,14 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
           className={styles.containerProps__CardProduct}
         >
           <p className={styles.descriptionItem__CardProduct}>
-            {product.descripcion.substring(0, 100)}...{" "}
-            <span className={styles.viewMore__CardProduct}>ver más</span>
+            {product.descripcion === undefined ? (
+              "Descripción no disponible"
+            ) : (
+              <>
+                {product.descripcion.substring(0, 100)}...
+                <span className={styles.viewMore__CardProduct}>ver más</span>
+              </>
+            )}
           </p>
         </div>
         <div className={styles.actionCard__CardProduct}>

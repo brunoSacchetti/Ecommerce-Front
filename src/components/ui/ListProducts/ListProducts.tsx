@@ -28,43 +28,47 @@ export const ListProducts = () => {
 
   const filterInsumos = async () => {
     const allInsumos: IArticulo[] = [];
-    categoriaActual?.forEach((cat: ICategoria) => {
-      const insumosNoElaborar = cat.insumos
-        .filter((insumo: any) => !(insumo.esParaElaborar))
-        .map((insumo: any) => ({
-          id: insumo.id,
-          denominacion: insumo.denominacion,
-        }));
-      allInsumos.push(...insumosNoElaborar);
-    });
+    const insumosNoElaborar = categoriaActual?.insumos
+      .filter((insumo: any) => !(insumo.esParaElaborar))
+      .map((insumo: any) => ({
+        id: insumo.id,
+        denominacion: insumo.denominacion,
+        descripcion: insumo.descripcion,
+        precioVenta: insumo.precioVenta,
+        tipo: "insumo", // Establecer el tipo como insumo
+      }));
+    allInsumos.push(...insumosNoElaborar);
+    console.log(insumosNoElaborar);
     setInsumosGenericos(allInsumos);
   };
-
+  
   const filterArticulosManufacturados = async () => {
     const allArticulosManufacturados: IArticulo[] = [];
     console.log(categoriaActual);
-    
-    
-    categoriaActual?.forEach((cat: ICategoria) => {
-      const articulosManufacturados = cat.articulosManufacturados.map(
-        (articulo: any) => ({
-          id: articulo.id,
-          denominacion: articulo.denominacion,
-        })
-      );
-      allArticulosManufacturados.push(...articulosManufacturados);
-    });
+    const articulosManufacturados = categoriaActual?.articulosManufacturados.map(
+      (articulo: any) => ({
+        id: articulo.id,
+        denominacion: articulo.denominacion,
+        descripcion: articulo.descripcion,
+        precioVenta: articulo.precioVenta,
+        tipo: "manufacturado", // Establecer el tipo como manufacturado
+      })
+    );
+    allArticulosManufacturados.push(...articulosManufacturados);
     setArticulosManufacturadosGenericos(allArticulosManufacturados);
   };
+  
+
+  useEffect(() => {
+    fetchData();
+  }, [categoriaActual]);
+
 
   useEffect(() => {
     setArticuloGenerico([...insumosGenericos, ...articulosManufacturadosGenericos]);
   }, [insumosGenericos, articulosManufacturadosGenericos]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  
 
   const fetchData = async () => {
     await filterInsumos();
@@ -120,9 +124,9 @@ export const ListProducts = () => {
     }
   }, []); */
 
-  useEffect(() => {
+  /* useEffect(() => {
      getAllProductsFromDb();
-  }, []);
+  }, []); */
 
   const products = useAppSelector((state) => state.product.products);
 
@@ -137,7 +141,10 @@ export const ListProducts = () => {
     >
       <div className={styles.containerPrincipal__ListProducts}>
         <div className={styles.containerProducts__ListProducts}>
-          {products.map((el) => (
+          {/* {products.map((el) => (
+            <CardProduct key={el.id} product={el} />
+          ))} */}
+          {articuloGenerico.map((el) => (
             <CardProduct key={el.id} product={el} />
           ))}
         </div>

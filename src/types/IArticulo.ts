@@ -6,4 +6,5 @@ export default interface IArticulo extends Base<IArticulo>{
   precioVenta: number;
   unidadMedida: IUnidadMedida;
   idCategoria: number;
+  tipo?: string;
 }
