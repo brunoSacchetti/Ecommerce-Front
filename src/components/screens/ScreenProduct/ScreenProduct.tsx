@@ -26,7 +26,10 @@ export const ScreenProduct = () => {
   const [amount, setAmount] = useState(1);
   const [images, setImages] = useState<IImagen[]>([]);
   const product = useAppSelector((state) => state.product.productActive);
-  const imageService = new ImagenService(`${API_URL}/ArticuloManufacturado`);
+
+  const imageServiceManufacturado = new ImagenService(`${API_URL}/ArticuloManufacturado`);
+  const imageServiceInsumo = new ImagenService(`${API_URL}/ArticuloInsumo`);
+
 
   const incrementAmount = () => {
     setAmount((prev) => prev + 1);
@@ -43,17 +46,24 @@ export const ScreenProduct = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        if (product) {
-          const data = await imageService.getImagesByArticuloId(product.id);
-          setImages(data);
+        let data;
+        if (product?.tipo === "insumo") {
+          data = await imageServiceInsumo.getImagesByArticuloId(product.id);
+        } else if (product?.tipo === "manufacturado") {
+          data = await imageServiceManufacturado.getImagesByArticuloId(product.id);
+        } else {
+          // Manejar el caso en el que el tipo de producto no sea "insumo" ni "manufacturado"
+          console.error("Tipo de producto no válido:", product?.tipo);
+          return; // Salir de la función sin cambiar el estado de las imágenes
         }
+        setImages(data);
       } catch (error) {
         Swal.fire("Error", "Error al obtener las imágenes", "error");
       }
     };
-
+  
     fetchImages();
-  }, [product]);
+  }, [product?.id, product?.tipo]);
 
   if (!product) {
     return <div>Loading...</div>;
