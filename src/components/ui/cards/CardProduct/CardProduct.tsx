@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { alertError } from "../../../../helpers/alerts";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import { setProductActive } from "../../../../redux/slices/Products";
 import styles from "./CardProduct.module.css";
 import { IconCustom } from "../../Icon/Icon";
@@ -11,6 +11,11 @@ import { ImagenService } from "../../../../services/ImagenService";
 import IImagen from "../../../../types/IImagen";
 import Swal from "sweetalert2";
 import IArticulo from "../../../../types/IArticulo";
+import {
+  addProductToCart,
+  removeProductFromCart,
+  updateProductQuantity,
+} from "../../../../redux/slices/cartSlice";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -19,12 +24,16 @@ interface ICardProduct {
 }
 
 export const CardProduct: FC<ICardProduct> = ({ product }) => {
-  const imageServiceManufacturado = new ImagenService(`${API_URL}/ArticuloManufacturado`);
-  
+  const imageServiceManufacturado = new ImagenService(
+    `${API_URL}/ArticuloManufacturado`
+  );
+
   const imageServiceInsumo = new ImagenService(`${API_URL}/ArticuloInsumo`);
 
   const [images, setImages] = useState<IImagen[]>([]);
-  
+  const { productsList } = useAppSelector((state) => state.cart);
+
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -48,7 +57,9 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
         if (product.tipo === "insumo") {
           data = await imageServiceInsumo.getImagesByArticuloId(product.id);
         } else if (product.tipo === "manufacturado") {
-          data = await imageServiceManufacturado.getImagesByArticuloId(product.id);
+          data = await imageServiceManufacturado.getImagesByArticuloId(
+            product.id
+          );
         } else {
           // Manejar el caso en el que el tipo de producto no sea "insumo" ni "manufacturado"
           console.error("Tipo de producto no válido:", product.tipo);
@@ -59,18 +70,30 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
         Swal.fire("Error", "Error al obtener las imágenes", "error");
       }
     };
-  
+
     fetchImages();
   }, [product.id, product.tipo]);
 
-  const handleClickAddToCart = () => {
+  /* const handleClickAddToCart = () => {
     alertError("Proximamente", "Todavia no esta disponible");
+  }; */
+
+  const handleAddOrRemoveProduct = (product: IArticulo) => {
+    // Verifica si el producto ya está en el carrito
+    if (productsList.find((pdt) => pdt.id === product.id)) {
+      dispatch(removeProductFromCart(product.id)); // Asume que esta acción existe y está correctamente definida
+    } else {
+      dispatch(addProductToCart(product));
+    }
   };
 
+  
   const handleClickViewProduct = () => {
     dispatch(setProductActive(product));
     navigate("/product");
   };
+
+  const isInCart = productsList.find((pdt) => pdt.id === product.id);
 
   return (
     <div className={styles.containerProduct__CardProduct}>
@@ -109,9 +132,12 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
         </div>
         <div className={styles.actionCard__CardProduct}>
           <b>${product.precioVenta}</b>
-          <Button onClick={handleClickAddToCart} variant="outlined">
-            Agregar
-            <IconCustom icon="shopping_cart" />
+          <Button
+            className={`btn ${isInCart ? "btn-danger" : "btn-success"} `}
+            style={{ width: "30%", margin: "10px" }}
+            onClick={() => handleAddOrRemoveProduct(product)}
+          >
+            {isInCart ? "Remove" : "Add"} to Cart
           </Button>
         </div>
       </div>

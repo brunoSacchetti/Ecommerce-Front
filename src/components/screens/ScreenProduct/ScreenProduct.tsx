@@ -12,6 +12,8 @@ import IImagen from "../../../types/IImagen";
 import Swal from "sweetalert2";
 
 import styles from "./ScreenProduct.module.css";
+import { addProductToCart, removeProductFromCart, updateProductQuantity } from "../../../redux/slices/cartSlice";
+import IArticulo from "../../../types/IArticulo";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,17 +32,25 @@ export const ScreenProduct = () => {
   const imageServiceManufacturado = new ImagenService(`${API_URL}/ArticuloManufacturado`);
   const imageServiceInsumo = new ImagenService(`${API_URL}/ArticuloInsumo`);
 
+  const { productsList } = useAppSelector((state) => state.cart);
+  const productQuantities = useAppSelector((state) => state.cart.productQuantities);
 
-  const incrementAmount = () => {
+
+  /* const incrementAmount = () => {
     setAmount((prev) => prev + 1);
   };
   const decrementAmount = () => {
     if (amount > 0) {
       setAmount((prev) => prev - 1);
     }
+  }; */
+
+  const handleIncrementQuantity = (id: number) => {
+    dispatch(updateProductQuantity({ id, quantity: productQuantities[id] + 1 || 1 }));
   };
-  const handleAddToCart = () => {
-    alertError("Proximamente", "Todavia no esta disponible");
+  
+  const handleDecrementQuantity = (id: number) => {
+    dispatch(updateProductQuantity({ id, quantity: productQuantities[id] - 1 || 0 }));
   };
 
   useEffect(() => {
@@ -69,6 +79,15 @@ export const ScreenProduct = () => {
     return <div>Loading...</div>;
   }
 
+  const handleAddOrRemoveProduct = (product: IArticulo) => {
+    // Verifica si el producto ya está en el carrito
+    if (productsList.find((pdt) => pdt.id === product.id)) {
+      dispatch(removeProductFromCart(product.id)); // Asume que esta acción existe y está correctamente definida
+    } else {
+      dispatch(addProductToCart(product));
+    }
+  };
+
   return (
     <>
       <div className={styles.containerPrincipal__Product}>
@@ -93,24 +112,24 @@ export const ScreenProduct = () => {
               <div className={styles.productContainerActions__Product}>
                 <div className={styles.productAmount__Product}>
                   <Button
-                    disabled={amount === 0}
+                    disabled={productQuantities[product.id] === 0}
                     variant="contained"
-                    onClick={decrementAmount}
+                    onClick={() => handleDecrementQuantity(product.id)}
                   >
                     <IconCustom icon={`${amount > 1 ? "remove" : "delete"}`} />
                   </Button>
-                  <h2>Cantidad: {amount}</h2>
-                  <Button variant="contained" onClick={incrementAmount}>
+                  <h2>Cantidad: {productQuantities[product.id]}</h2>
+                  <Button variant="contained" onClick={() => handleIncrementQuantity(product.id)}>
                     <IconCustom icon="add" />
                   </Button>
                 </div>
                 <Button
-                  onClick={handleAddToCart}
-                  color="success"
-                  variant="contained"
-                >
-                  Agregar al carrito <IconCustom icon="add_shopping_cart" />
-                </Button>
+                    className={`btn ${productsList.find((pdt) => pdt.id === product.id) ? "btn-danger" : "btn-success"}`}
+                    style={{ width: "100px", textAlign: "center" }}
+                    onClick={() => handleAddOrRemoveProduct(product)}
+                  >
+                    {productsList.find((pdt) => pdt.id === product.id) ? "Remove" : "Add"} to Cart
+                  </Button>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { ScreenStore } from "../components/screens/ScreenStore/ScreenStore";
 import { ScreenProduct } from "../components/screens/ScreenProduct/ScreenProduct";
 import { Home } from "../components/screens/Home/Home";
 import { useAppSelector } from "../hooks/redux";
+import { Cart } from "../components/screens/Cart/Cart";
 
 export const AppRouter = () => {
   const { category } = useAppSelector((state) => state.filters);
@@ -21,6 +22,7 @@ export const AppRouter = () => {
         path="/product"
         element={productActive ? <ScreenProduct /> : <Navigate to="/store" />}
       />
+      <Route path="*" element={<Cart/>} />
     </Routes>
   );
 };
