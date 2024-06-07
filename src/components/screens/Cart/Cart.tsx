@@ -44,17 +44,18 @@ export const Cart = () => {
             eliminado: false,
             horaEstimadaFinalizacion: "18:30:00", // Esto es un ejemplo, debes proporcionar la hora real
             total: 0, // Se calculará más adelante
-            totalCosto: 0, // Se calculará más adelante
+            totalCosto: 1000, // Se calculará más adelante
             estado: Estado.PREPARACION, // Estado predeterminado
             tipoEnvio: TipoEnvio.TAKE_AWAY, // Tipo de envío predeterminado
             formaPago: FormaPago.EFECTIVO, // Forma de pago predeterminada
             fechaPedido: new Date().toISOString(), // Fecha actual
             idSucursal: 1, // ID de la sucursal predeterminada
-            detallePedido: [], // Se llenará más adelante
+            detallePedidos: [], // Se llenará más adelante
         };
 
         // 2. Crear los detalles del pedido y calcular el total
         const detalles = [];
+
         for (const product of productsList) {
             const cantidad = productQuantities[product.id] || 1;
             const subTotal = product.precioVenta * cantidad;
@@ -73,11 +74,16 @@ export const Cart = () => {
             detalles.push(detalle);
         }
 
+        console.log(detalles);
+        
         // Asignar el total calculado al pedido
         pedido.total = totalPedido;
 
         // 3. Asignar los detalles al pedido
-        pedido.detallePedido = detalles;
+        pedido.detallePedidos = detalles;
+
+        console.log(pedido);
+        
 
         // 4. Crear el pedido con los detalles
         const pedidoResponse = await pedidoService.post(`${API_URL}/pedido`, pedido);

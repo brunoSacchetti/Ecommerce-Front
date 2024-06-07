@@ -13,5 +13,5 @@ export interface PedidoPost extends Base<PedidoPost> {
     formaPago: FormaPago,
     fechaPedido: string,
     idSucursal: number
-    detallePedido: DetallePedidoPost[]
+    detallePedidos: DetallePedidoPost[]
 }
